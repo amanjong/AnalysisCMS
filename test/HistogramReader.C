@@ -613,7 +613,7 @@ TLegend* HistogramReader::DrawLegend(Float_t x1,
   TString final_label = Form(" %s", label.Data());
 
   if (_drawyield && !_publicstyle)
-    final_label = Form("%s (%.0f)", final_label.Data(), Yield(hist));
+    final_label = Form("%s (%f)", final_label.Data(), Yield(hist));
 
   legend->AddEntry(hist, final_label.Data(), option.Data());
   legend->Draw();
@@ -646,7 +646,7 @@ TLegend* HistogramReader::DrawLegend(Float_t x1,
 
       for (int i=1; i<=hist->GetNbinsX(); i++) {
 
-	printf(" & %16.0f", hist->GetBinContent(i));
+	printf(" & %16f", hist->GetBinContent(i));
       }
 
       printf(" \\\\\n");
@@ -855,7 +855,6 @@ void HistogramReader::SetHistogram(TH1*     hist,
     {
       hist->SetFillStyle(0);
       hist->SetLineWidth(2);
-
       hist->Scale(1. / Yield(hist));
     }
 

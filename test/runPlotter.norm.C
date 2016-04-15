@@ -20,7 +20,7 @@ enum {linY, logY};
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void runPlotter(TString level,
-		TString option = "hist")
+		TString option = "nostack,hist")
 {
   gInterpreter->ExecuteMacro("PaperStyle.C");
 
@@ -47,7 +47,7 @@ void runPlotter(TString level,
 
   HistogramReader plotter(inputdir + analysis, outputdir);
 
-  plotter.SetStackOption("nostack,hist");
+  plotter.SetStackOption(option);
   plotter.SetPublicStyle( false);
   plotter.SetSavePdf    ( false);
 
@@ -178,7 +178,8 @@ void runPlotter(TString level,
 
   // Draw distributions
   //----------------------------------------------------------------------------
-  if (!option.Contains("nostack")) plotter.SetDrawYield(true);
+  //  if (!option.Contains("nostack")) plotter.SetDrawYield(true);
+  plotter.SetDrawYield(true);
 
   float m2l_xmin   = (level.Contains("WZ")) ?  60 :   0;  // [GeV]
   float m2l_xmax   = (level.Contains("WZ")) ? 120 : 400;  // [GeV]
@@ -186,7 +187,7 @@ void runPlotter(TString level,
   
   for (int j=0; j<=njetbin; j++)
     {
-      if (!analysis.EqualTo("Top") && !analysis.EqualTo("WW") && j != njetbin) continue;   
+      //      if (!analysis.EqualTo("Top") && !analysis.EqualTo("WW") && j != njetbin) continue;   
          
       TString jetbin = (j < njetbin) ? Form("/%djet", j) : "";
 
@@ -205,6 +206,7 @@ void runPlotter(TString level,
 
 	  // Common histograms
 	  //--------------------------------------------------------------------
+	  /*
 	  plotter.Draw(prefix + "nvtx"     + suffix, "number of vertices",          -1, 0, "NULL", linY,  true, 0,  30);
 	  plotter.Draw(prefix + "sumjpt12" + suffix, "p_{T}^{jet1} + p_{T}^{jet2}", 10, 0, "GeV",  scale, true, 0, 600);
 	  plotter.Draw(prefix + "sumpt12"  + suffix, "p_{T}^{lep1} + p_{T}^{lep2}", 10, 0, "GeV",  scale, true, 0, 600);
@@ -223,7 +225,9 @@ void runPlotter(TString level,
 	  plotter.Draw(prefix + "dphilep1jet1"  + suffix, "#Delta#phi(lep1,jet1)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
 	  plotter.Draw(prefix + "dphilep1jet2"  + suffix, "#Delta#phi(lep1,jet2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
 	  plotter.Draw(prefix + "dphilep2jet1"  + suffix, "#Delta#phi(lep2,jet1)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
+	  */
 	  plotter.Draw(prefix + "dphilep2jet2"  + suffix, "#Delta#phi(lep2,jet2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
+	  /*
 	  plotter.Draw(prefix + "dphill"        + suffix, "#Delta#phi(lep1,lep2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
 	  plotter.Draw(prefix + "dphillmet"     + suffix, "#Delta#phi(ll,E_{T}^{miss})",        5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
 	  plotter.Draw(prefix + "dphillstar"    + suffix, "#Delta#phi*(lep1,lep2)",             5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
@@ -296,6 +300,7 @@ void runPlotter(TString level,
 	    //plotter.Draw(prefix + "mr"             + suffix, "M_{R}",                      10, 0, "GeV",  scale, false, 0, 300);
 	    }
 
+	  */
 
 	  // WZ histograms
 	  //--------------------------------------------------------------------

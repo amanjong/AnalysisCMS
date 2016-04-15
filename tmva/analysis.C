@@ -10,7 +10,8 @@
 
 // Constants
 //------------------------------------------------------------------------------
-const TString inputdir = "../minitrees/TTDM/";
+const int     _verbosity = 0;
+const TString _inputdir  = "../minitrees/TTDM/";
 
 enum {njmin, njmax, nbmin, nbmax};
 
@@ -82,8 +83,11 @@ void analysis(TString signal            = "ttDM0001scalar0500",
     gSystem->mkdir("datacards", kTRUE);
   
     //    PrintYields(_cut);
+    
+    int   nstep = 50;
+    float step  = 1. / nstep;
 
-    for (int i=0; i<10; i++) PrintYields(0.1*i);
+    for (int i=0; i<nstep; i++) PrintYields(step * i);
   }
 
 
@@ -91,7 +95,7 @@ void analysis(TString signal            = "ttDM0001scalar0500",
   //----------------------------------------------------------------------------
   if (doGetScaleFactors) {
 
-    printf("\n [GetScaleFactors]\n\n");
+    if (_verbosity > 0) printf("\n [GetScaleFactors]\n\n");
 
     float ww_box1[] = {0,  0, 0, 0};
     float ww_box2[] = {1, -1, 0, 0};
@@ -113,7 +117,7 @@ void analysis(TString signal            = "ttDM0001scalar0500",
   //----------------------------------------------------------------------------
   if (doGetPdfQcdSyst)
     {
-      printf("\n [GetPdfQcdSyst]\n\n");
+      if (_verbosity > 0) printf("\n [GetPdfQcdSyst]\n\n");
 
       GetPdfQcdSyst("02_WZTo3LNu");
       GetPdfQcdSyst("03_ZZ");
@@ -128,8 +132,10 @@ void analysis(TString signal            = "ttDM0001scalar0500",
     //GetPdfQcdSyst("13_VVV");
       GetPdfQcdSyst("14_HZ");
 
-      printf("\n");
+      if (_verbosity > 0) printf("\n");
     }
+
+  printf("\n [analysis] I hope you are happy with the results!\n\n");
 }
 
 
@@ -138,7 +144,7 @@ void analysis(TString signal            = "ttDM0001scalar0500",
 //------------------------------------------------------------------------------
 void GetPdfQcdSyst(TString sample)
 {
-  TFile* file = new TFile(inputdir + sample + ".root", "read");
+  TFile* file = new TFile(_inputdir + sample + ".root", "read");
 
   TTree* tree = (TTree*)file->Get("latino");
 
@@ -227,7 +233,7 @@ float GetYield(TString sample, float cut)
 {
   if (cut < 0) cut = _cut;
 
-  TFile* file = new TFile(inputdir + sample + ".root", "read");
+  TFile* file = new TFile(_inputdir + sample + ".root", "read");
 
   TTree* tree = (TTree*)file->Get("latino");
 
@@ -250,7 +256,11 @@ float GetYield(TString sample, float cut)
     if (njet > 1 && mva > cut) yield += eventW;
   }
 
-  PrintYield(sample, yield);
+  if (_verbosity > 0) PrintYield(sample, yield);
+
+  delete tree;
+
+  file->Close();
 
   return yield;
 }
@@ -272,7 +282,11 @@ void PrintYields(float cut)
 {
   if (cut < 0) cut = _cut;
 
-  printf("\n [PrintYields] MVA cut = %.2f\n\n", cut);
+  if (_verbosity > 0) printf("\n");
+
+  printf(" [PrintYields] MVA cut = %.2f\n", cut);
+
+  if (_verbosity > 0) printf("\n");
 
   float nsignal = GetYield(_signal,   cut);
   float ndata   = GetYield("01_Data", cut);
@@ -290,13 +304,16 @@ void PrintYields(float cut)
   nexpected += GetYield("05_ST",        cut);
   nexpected += GetYield("00_Fakes",     cut);
 
-  printf("--------------------------------\n");
+  if (_verbosity > 0)
+    {
+      printf("--------------------------------\n");
 
-  PrintYield("signal",   nsignal);
-  PrintYield("data",     ndata);
-  PrintYield("expected", nexpected);
+      PrintYield("signal",   nsignal);
+      PrintYield("data",     ndata);
+      PrintYield("expected", nexpected);
 
-  printf("\n");
+      printf("\n");
+    }
 
 
   //  Create the datacard
@@ -335,7 +352,7 @@ void GetBoxPopulation(TString sample,
 {
   float temporary_sf = (sample.Contains("TTTo2L2Nu")) ? (1./0.93) : 1.;
 
-  TFile* file = new TFile(inputdir + sample + ".root", "read");
+  TFile* file = new TFile(_inputdir + sample + ".root", "read");
 
   TTree* tree = (TTree*)file->Get("latino");
 
@@ -360,8 +377,8 @@ void GetBoxPopulation(TString sample,
 
     tree->GetEntry(ievt);
 
-    bool reject_region1 = (mva < _cut/2. || mva > _cut);
-    bool reject_region2 = (mva > _cut/2.);
+    bool reject_region1 = (mva < _cut-0.2 || mva > _cut);
+    bool reject_region2 = (mva < _cut-0.4 || mva > _cut-0.2);
 
     bool reject_box1 = ((box1[njmin] > -1 && njet  < box1[njmin]) ||
 			(box1[njmax] > -1 && njet  > box1[njmax]) ||
@@ -387,10 +404,14 @@ void GetBoxPopulation(TString sample,
 void GetScaleFactors(float* box_ww,
 		     float* box_top)
 {
-  printf("\n-------------------------------------------------------------\n\n");
-  printf("     box = { njmin, njmax, nbmin, nbmax, }\n");
-  printf(" ww  box = {"); for (UInt_t i=0; i<4; i++) printf("%6.0f,", box_ww [i]); printf(" }\n");
-  printf(" top box = {"); for (UInt_t i=0; i<4; i++) printf("%6.0f,", box_top[i]); printf(" }");
+
+  if (_verbosity > 0)
+    {
+      printf("\n-------------------------------------------------------------\n\n");
+      printf("     box = { njmin, njmax, nbmin, nbmax, }\n");
+      printf(" ww  box = {"); for (UInt_t i=0; i<4; i++) printf("%6.0f,", box_ww [i]); printf(" }\n");
+      printf(" top box = {"); for (UInt_t i=0; i<4; i++) printf("%6.0f,", box_top[i]); printf(" }");
+    }
 
   float r1b1_data,  r1b2_data,  r2b1_data,  r2b2_data;
   float r1b1_top,   r1b2_top,   r2b1_top,   r2b2_top;
@@ -423,8 +444,8 @@ void GetScaleFactors(float* box_ww,
 
   printf("\n");
 
-  SolveSystem("[ cut/2 < MVA < cut   ]", r1b1_data, r1b1_bkg, r1b1_top, r1b1_ww, r1b2_data, r1b2_bkg, r1b2_top, r1b2_ww);
-  SolveSystem("[         MVA < cut/2 ]", r2b1_data, r2b1_bkg, r2b1_top, r2b1_ww, r2b2_data, r2b2_bkg, r2b2_top, r2b2_ww);
+  SolveSystem("[ cut-0.2 < MVA < cut     ]", r1b1_data, r1b1_bkg, r1b1_top, r1b1_ww, r1b2_data, r1b2_bkg, r1b2_top, r1b2_ww);
+  SolveSystem("[ cut-0.4 < MVA < cut-0.2 ]", r2b1_data, r2b1_bkg, r2b1_top, r2b1_ww, r2b2_data, r2b2_bkg, r2b2_top, r2b2_ww);
 
   printf("\n");
 }
@@ -468,13 +489,17 @@ void SolveSystem(TString region,
 
   // Print
   //----------------------------------------------------------------------------
-  printf("\n");
-  printf("        ww box \t top box\n");
-  printf(" data = %6.1f \t %7.1f\n", data1, data2);
-  printf(" bkg  = %6.1f \t %7.1f\n", bkg1,  bkg2);
-  printf(" top  = %6.1f \t %7.1f\n", top1,  top2);
-  printf(" ww   = %6.1f \t %7.1f\n", ww1,   ww2);
-  printf("\n");
+  if (_verbosity > 0)
+    {
+      printf("\n");
+      printf("        ww box \t top box\n");
+      printf(" data = %6.1f \t %7.1f\n", data1, data2);
+      printf(" bkg  = %6.1f \t %7.1f\n", bkg1,  bkg2);
+      printf(" top  = %6.1f \t %7.1f\n", top1,  top2);
+      printf(" ww   = %6.1f \t %7.1f\n", ww1,   ww2);
+      printf("\n");
+    }
+
   printf(" [SolveSystem] %s sf_top = %5.2f +- %5.2f and sf_ww = %5.2f +- %5.2f with cov = %5.2f\n",
 	 region.Data(),
 	 sf_top,
