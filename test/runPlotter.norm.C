@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 const Bool_t datadriven = true;
 
-const TString inputdir  = "../rootfiles/";
+const TString inputdir  = "../rootfiles/nominal/";
 const TString outputdir = "figures/";
 
 enum {linY, logY};
@@ -187,7 +187,7 @@ void runPlotter(TString level,
   
   for (int j=0; j<=njetbin; j++)
     {
-      //      if (!analysis.EqualTo("Top") && !analysis.EqualTo("WW") && j != njetbin) continue;   
+      // if (!analysis.EqualTo("Top") && !analysis.EqualTo("WW") && j != njetbin) continue;   
          
       TString jetbin = (j < njetbin) ? Form("/%djet", j) : "";
 
@@ -206,7 +206,6 @@ void runPlotter(TString level,
 
 	  // Common histograms
 	  //--------------------------------------------------------------------
-	  /*
 	  plotter.Draw(prefix + "nvtx"     + suffix, "number of vertices",          -1, 0, "NULL", linY,  true, 0,  30);
 	  plotter.Draw(prefix + "sumjpt12" + suffix, "p_{T}^{jet1} + p_{T}^{jet2}", 10, 0, "GeV",  scale, true, 0, 600);
 	  plotter.Draw(prefix + "sumpt12"  + suffix, "p_{T}^{lep1} + p_{T}^{lep2}", 10, 0, "GeV",  scale, true, 0, 600);
@@ -225,16 +224,14 @@ void runPlotter(TString level,
 	  plotter.Draw(prefix + "dphilep1jet1"  + suffix, "#Delta#phi(lep1,jet1)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
 	  plotter.Draw(prefix + "dphilep1jet2"  + suffix, "#Delta#phi(lep1,jet2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
 	  plotter.Draw(prefix + "dphilep2jet1"  + suffix, "#Delta#phi(lep2,jet1)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
-	  */
 	  plotter.Draw(prefix + "dphilep2jet2"  + suffix, "#Delta#phi(lep2,jet2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
-	  /*
 	  plotter.Draw(prefix + "dphill"        + suffix, "#Delta#phi(lep1,lep2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
-	  plotter.Draw(prefix + "dphillmet"     + suffix, "#Delta#phi(ll,E_{T}^{miss})",        5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
+          plotter.Draw(prefix + "dphillmet"     + suffix, "#Delta#phi(ll,E_{T}^{miss})",        5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
 	  plotter.Draw(prefix + "dphillstar"    + suffix, "#Delta#phi*(lep1,lep2)",             5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
 	  plotter.Draw(prefix + "dphilmet1"     + suffix, "#Delta#phi(lep1,E_{T}^{miss})",      5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
 	  plotter.Draw(prefix + "dphilmet2"     + suffix, "#Delta#phi(lep2,E_{T}^{miss})",      5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
 	  plotter.Draw(prefix + "drll"          + suffix, "#DeltaR(lep1,lep2)",                 5, 1, "NULL", linY, false, 0, 4.0, 0, 0.6);
-	  plotter.Draw(prefix + "lep1eta"       + suffix, "leading lepton #eta",               -1, 1, "NULL", scale);
+          plotter.Draw(prefix + "lep1eta"       + suffix, "leading lepton #eta",               -1, 1, "NULL", scale);
 	  plotter.Draw(prefix + "lep2eta"       + suffix, "trailing lepton #eta",              -1, 1, "NULL", scale);
 	  plotter.Draw(prefix + "jet1eta"       + suffix, "leading jet #eta",                  -1, 1, "NULL", scale);
 	  plotter.Draw(prefix + "jet2eta"       + suffix, "trailing jet #eta",                 -1, 1, "NULL", scale);
@@ -244,7 +241,7 @@ void runPlotter(TString level,
 	  plotter.Draw(prefix + "jet2phi"       + suffix, "trailing jet #phi",                  5, 2, "rad",  scale);
 	  plotter.Draw(prefix + "metPfType1Phi" + suffix, "E_{T}^{miss} #phi",                  5, 2, "rad",  scale);
 	  plotter.Draw(prefix + "metTtrkPhi"    + suffix, "track E_{T}^{miss} #phi",            5, 2, "rad",  scale);
-	  plotter.Draw(prefix + "lep1pt"        + suffix, "leading lepton p_{T}",               5, 0, "GeV",  scale, true, 0,  400);
+          plotter.Draw(prefix + "lep1pt"        + suffix, "leading lepton p_{T}",               5, 0, "GeV",  scale, true, 0,  400);
 	  plotter.Draw(prefix + "lep2pt"        + suffix, "trailing lepton p_{T}",              5, 0, "GeV",  scale, true, 0,  400);
 	  plotter.Draw(prefix + "jet1pt"        + suffix, "leading jet p_{T}",                  5, 0, "GeV",  scale, true, 0,  400);
 	  plotter.Draw(prefix + "jet2pt"        + suffix, "trailing jet p_{T}",                 5, 0, "GeV",  scale, true, 0,  400);
@@ -297,10 +294,9 @@ void runPlotter(TString level,
               plotter.Draw(prefix + "deltarlep1jet2" + suffix, "#DeltaR(lep1,jet2)",          5, 2, "NULL", linY, false, 0, 4, 0, 0.3);
               plotter.Draw(prefix + "deltarlep2jet1" + suffix, "#DeltaR(lep2,jet1)",          5, 2, "NULL", linY, false, 0, 4, 0, 0.3);
               plotter.Draw(prefix + "deltarlep2jet2" + suffix, "#DeltaR(lep2,jet2)",          5, 2, "NULL", linY, false, 0, 4, 0, 0.3);
-	    //plotter.Draw(prefix + "mr"             + suffix, "M_{R}",                      10, 0, "GeV",  scale, false, 0, 300);
+	      //plotter.Draw(prefix + "mr"             + suffix, "M_{R}",                      10, 0, "GeV",  scale, false, 0, 300);
 	    }
 
-	  */
 
 	  // WZ histograms
 	  //--------------------------------------------------------------------
