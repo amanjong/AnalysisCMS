@@ -14,7 +14,7 @@
 
 // Constants
 //------------------------------------------------------------------------------
-const TString inputdir       = "../minitrees/nominal/TTDM/";
+const TString inputdir       = "../minitrees/nominal/MonoH/";
 const TString trainingdir    = "output/training/";
 const TString weightsdir     = "output/weights/";
 const TString applicationdir = "output/application/";
@@ -42,7 +42,7 @@ std::vector<TTree*> _mctree;
 // MVA
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void MVA(TString signal     = "ttDM0001scalar0500",
+void MVA(TString signal     = "monoH_2HDM_MZp-600_MA0-400",
 	 bool    doMVATrain = true,
 	 bool    doMVARead  = false)
 {
@@ -102,7 +102,7 @@ void MVATrain(TString signal)
   _mctree.clear();
 
   AddProcess("signal", signal);
-  AddProcess("background", "TTTo2L2Nu");
+  AddProcess("background", "HZJ_HToWW_M125");
 
   //  AddProcess("background", "14_HZ");
   //  AddProcess("background", "10_HWW");
@@ -133,7 +133,7 @@ void MVATrain(TString signal)
   factory->AddVariable("metPfType1",   "", "", 'F');
   factory->AddVariable("m2l",          "", "", 'F');
   factory->AddVariable("njet",         "", "", 'F');
-  factory->AddVariable("nbjet20loose", "", "", 'F');
+  //  factory->AddVariable("nbjet20loose", "", "", 'F');
   factory->AddVariable("lep1pt",       "", "", 'F');
   factory->AddVariable("lep2pt",       "", "", 'F');
   factory->AddVariable("jet1pt",       "", "", 'F');
@@ -154,7 +154,7 @@ void MVATrain(TString signal)
 
   // Preselection cuts and preparation
   //----------------------------------------------------------------------------
-  factory->PrepareTrainingAndTestTree("njet > 1", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=2000:nTest_Background=2000:SplitMode=Alternate:!V");
+  factory->PrepareTrainingAndTestTree("njet > 1", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:!V");
 
 
   // Book MVA
@@ -189,7 +189,7 @@ void MVARead(TString signal, TString filename)
   float metPfType1;
   float m2l;
   float njet;
-  float nbjet20loose;
+  //  float nbjet20loose;
   float lep1pt;
   float lep2pt;
   float jet1pt;
@@ -213,7 +213,7 @@ void MVARead(TString signal, TString filename)
   reader->AddVariable("metPfType1",   &metPfType1);
   reader->AddVariable("m2l",          &m2l);
   reader->AddVariable("njet",         &njet);
-  reader->AddVariable("nbjet20loose", &nbjet20loose);
+  //  reader->AddVariable("nbjet20loose", &nbjet20loose);
   reader->AddVariable("lep1pt",       &lep1pt);
   reader->AddVariable("lep2pt",       &lep2pt);
   reader->AddVariable("jet1pt",       &jet1pt);
@@ -251,7 +251,7 @@ void MVARead(TString signal, TString filename)
   theTree->SetBranchAddress("metPfType1",   &metPfType1);
   theTree->SetBranchAddress("m2l",          &m2l);
   theTree->SetBranchAddress("njet",         &njet);
-  theTree->SetBranchAddress("nbjet20loose", &nbjet20loose);
+  //  theTree->SetBranchAddress("nbjet20loose", &nbjet20loose);
   theTree->SetBranchAddress("lep1pt",       &lep1pt);
   theTree->SetBranchAddress("lep2pt",       &lep2pt);
   theTree->SetBranchAddress("jet1pt",       &jet1pt);

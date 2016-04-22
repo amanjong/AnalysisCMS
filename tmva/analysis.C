@@ -11,7 +11,7 @@
 // Constants
 //------------------------------------------------------------------------------
 const int     _verbosity = 0;
-const TString _inputdir  = "../minitrees/TTDM/";
+const TString _inputdir  = "../minitrees/MonoH/";
 
 enum {njmin, njmax, nbmin, nbmax};
 
@@ -62,7 +62,7 @@ ofstream                 _datacard;
 // analysis
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void analysis(TString signal            = "ttDM0001scalar0500",
+void analysis(TString signal            = "monoH_2HDM_MZp-600_MA0-400",
 	      float   cut               = 0.8,
 	      bool    doPrintYields     = false,
 	      bool    doGetScaleFactors = true,

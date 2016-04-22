@@ -31,11 +31,11 @@
 #==============================================================================================================================================================
 
 /gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-600_MA0-400.root
-#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-800_MA0-400.root
-#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-1000_MA0-400.root
-#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-1200_MA0-400.root
-#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-1400_MA0-400.root
-#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-1700_MA0-400.root
+/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-800_MA0-400.root
+/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-1000_MA0-400.root
+/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-1200_MA0-400.root
+/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-1400_MA0-400.root
+/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-1700_MA0-400.root
 /gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-2000_MA0-400.root
 #/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_monoH_2HDM_MZp-2500_MA0-400.root
 
@@ -43,14 +43,14 @@
 # MC
 #==============================================================================================================================================================
 
-# ZH
-/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_HZJ_HToWW_M125.root
+# HZ
+#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_HZJ_HToWW_M125.root
 
 # HWW
-/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_GluGluHToWWTo2L2Nu_M124.root
+#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_GluGluHToWWTo2L2Nu_M124.root
 
 # WW
-/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_WWTo2L2Nu.root
+#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_WWTo2L2Nu.root
 
 # ttH
-/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_ttHJetToNonbb_M125.root
+#/gpfs/csic_projects/tier3data/LatinosSkims/RunII/cernbox_76x/22Jan_25ns_mAODv2_MC__l2loose__hadd__bSFL2pTEff__l2tight/latino_ttHJetToNonbb_M125.root
