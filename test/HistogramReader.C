@@ -645,44 +645,7 @@ TLegend* HistogramReader::DrawLegend(Float_t x1,
   legend->AddEntry(hist, final_label.Data(), option.Data());
   legend->Draw();
 
-<<<<<<< HEAD
-
-  //----------------------------------------------------------------------------
-  // Print yields
-  //----------------------------------------------------------------------------
-  TString hname = hist->GetName();
-
-  if (hname.Contains("counterLum") && hname.Contains("evolution"))
-    {
-      if (_printlabels)
-	{
-	  _printlabels = false;
-
-	  printf("\n %22s", " ");
-	  
-	  for (int i=1; i<=hist->GetNbinsX(); i++) {
-
-	    TString binlabel = (TString)hist->GetXaxis()->GetBinLabel(i);
-	    
-	    printf(" & %16s", binlabel.Data());
-	  }
-
-	  printf(" \\\\\n");
-	}
-
-      printf(" %22s", label.Data());
-
-      for (int i=1; i<=hist->GetNbinsX(); i++) {
-
-	printf(" & %16f", hist->GetBinContent(i));
-      }
-
-      printf(" \\\\\n");
-    }
-
-=======
   WriteYields(hist, label);
->>>>>>> 12fe4b444a3daabe638910467315f59976608c71
 
   return legend;
 }
