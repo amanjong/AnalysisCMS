@@ -849,6 +849,7 @@ void HistogramReader::SetHistogram(TH1*     hist,
     {
       hist->SetFillStyle(0);
       hist->SetLineWidth(2);
+
       hist->Scale(1. / Yield(hist));
     }
 
