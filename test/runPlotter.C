@@ -155,7 +155,7 @@ void runPlotter(TString level,
     {
       plotter.LoopEventsByCut(analysis, "h_counterLum_" + schannel[i]);
 
-      plotter.Draw(analysis + "/h_counterLum_" + schannel[i] + "_evolution", "", -1, 0, "NULL", scale, false);
+      plotter.Draw(analysis + "/h_counterLum_" + schannel[i] + "_evolution", "", -1, 0, "NULL", logY, false);
     }
 
 
@@ -182,8 +182,8 @@ void runPlotter(TString level,
   if (!option.Contains("nostack")) plotter.SetDrawYield(true);
 
   float m2l_xmin   = (level.Contains("WZ")) ?  60 :   0;  // [GeV]
-  float m2l_xmax   = (level.Contains("WZ")) ? 120 : 400;  // [GeV]
-  int   m2l_ngroup = (level.Contains("WZ")) ?   2 :  10;
+  float m2l_xmax   = (level.Contains("WZ")) ? 120 : 300;  // [GeV]
+  int   m2l_ngroup = (level.Contains("WZ")) ?   2 :   5;
   
   for (int j=0; j<=njetbin; j++)
     {
@@ -215,7 +215,8 @@ void runPlotter(TString level,
 
 	  // Common histograms with minitree variables
 	  //--------------------------------------------------------------------
-	  plotter.Draw(prefix + "m2l" + suffix, "m_{#font[12]{ll}}", m2l_ngroup, 0, "GeV", scale, true, m2l_xmin, m2l_xmax);
+	  plotter.Draw(prefix + "m2l" + suffix, "m_{#font[12]{ll}}", m2l_ngroup, 0, "GeV", linY, true, m2l_xmin, m2l_xmax);
+	  plotter.Draw(prefix + "m2l" + suffix, "m_{#font[12]{ll}}", m2l_ngroup, 0, "GeV", logY, true, m2l_xmin, m2l_xmax);
 
 	  plotter.Draw(prefix + "dphijet1met"   + suffix, "#Delta#phi(jet1,E_{T}^{miss})",      5, 2, "rad",  scale);
 	  plotter.Draw(prefix + "dphijet2met"   + suffix, "#Delta#phi(jet2,E_{T}^{miss})",      5, 2, "rad",  scale);
@@ -294,7 +295,10 @@ void runPlotter(TString level,
               plotter.Draw(prefix + "deltarlep1jet2" + suffix, "#DeltaR(lep1,jet2)",          5, 2, "NULL", scale);
               plotter.Draw(prefix + "deltarlep2jet1" + suffix, "#DeltaR(lep2,jet1)",          5, 2, "NULL", scale);
               plotter.Draw(prefix + "deltarlep2jet2" + suffix, "#DeltaR(lep2,jet2)",          5, 2, "NULL", scale);
+<<<<<<< HEAD
 	      //plotter.Draw(prefix + "mr"             + suffix, "M_{R}",                      10, 0, "GeV",  scale, false, 0, 300);
+=======
+>>>>>>> bab7a77bd8185b2c804f4592d9fdbda7b341a89e
 	    }
 
 
