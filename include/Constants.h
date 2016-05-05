@@ -4,12 +4,8 @@
 
 #include "CutsMonoH.h"
 //#include "CutsTop.h"
-<<<<<<< HEAD
+//#include "CutsStop.h" 
 //#include "CutsTTDM.h"
-=======
-//#include "CutsStop.h"
-#include "CutsTTDM.h"
->>>>>>> 3d0dcfdbaef2a76f4a54fc027a2f78ca096d20a0
 //#include "CutsWW.h"
 //#include "CutsWZ.h"
 
