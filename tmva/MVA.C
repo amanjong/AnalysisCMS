@@ -154,7 +154,7 @@ void MVATrain(TString signal)
 
   // Preselection cuts and preparation
   //----------------------------------------------------------------------------
-  factory->PrepareTrainingAndTestTree("njet > 1", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=2000:nTest_Background=2000:SplitMode=Alternate:!V");
+  factory->PrepareTrainingAndTestTree("njet > 1", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:!V");
 
 
   // Book MVA
@@ -261,8 +261,8 @@ void MVARead(TString signal, TString filename)
   theTree->SetBranchAddress("dphilep1jet1",   &dphilep1jet1);
   //  theTree->SetBranchAddress("dphilep1jet2",   &dphilep1jet2);
   //  theTree->SetBranchAddress("dphilmet1",      &dphilmet1);
-  //  theTree->SetBranchAddress("dphilep2jet1",   &dphilep2jet1);
-  theTree->SetBranchAddress("dphilep2jet2",   &dphilep2jet2);
+  theTree->SetBranchAddress("dphilep2jet1",   &dphilep2jet1);
+  //  theTree->SetBranchAddress("dphilep2jet2",   &dphilep2jet2);
   //  theTree->SetBranchAddress("dphilmet2",      &dphilmet2);
   //  theTree->SetBranchAddress("dphijj",         &dphijj);
   //  theTree->SetBranchAddress("dphijet1met",    &dphijet1met);
