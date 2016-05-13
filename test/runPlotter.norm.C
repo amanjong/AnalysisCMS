@@ -32,7 +32,9 @@ void runPlotter(TString level,
 
   if (analysis.EqualTo("NONE")) return;
 
-  float lumi = (analysis.EqualTo("TTDM")) ? lumi_fb_blind : lumi_fb;
+  float lumi = lumi_fb;
+  
+  if (analysis.EqualTo("TTDM")) lumi = lumi_fb_blind;
 
   Bool_t scale = logY;
 
@@ -71,12 +73,13 @@ void runPlotter(TString level,
   //----------------------------------------------------------------------------
   if (analysis.EqualTo("WZ"))
     {
-      plotter.AddProcess("02_WZTo3LNu", "WZ",      color_WZTo3LNu);
-      plotter.AddProcess("06_WW",       "WW",      color_WW);
-      plotter.AddProcess("11_Wg",       "W#gamma", color_Wg);
-      plotter.AddProcess("03_ZZ",       "ZZ",      color_ZZ);
-      plotter.AddProcess("09_TTV",      "ttV",     color_TTV);
-      plotter.AddProcess("13_VVV",      "VVV",     color_VVV);
+      plotter.AddProcess("02_WZTo3LNu", "WZ",       color_WZTo3LNu);
+      plotter.AddProcess("06_WW",       "WW",       color_WW);
+      plotter.AddProcess("11_Wg",       "W#gamma",  color_Wg);
+      plotter.AddProcess("15_WgStar",   "W#gamma*", color_WgStar);      
+      plotter.AddProcess("03_ZZ",       "ZZ",       color_ZZ);
+      plotter.AddProcess("09_TTV",      "ttV",      color_TTV);
+      plotter.AddProcess("13_VVV",      "VVV",      color_VVV);
 
       if (datadriven)
 	{
@@ -98,6 +101,7 @@ void runPlotter(TString level,
       //plotter.AddProcess("02_WZTo3LNu", "WZ",      color_WZTo3LNu);
       //plotter.AddProcess("03_ZZ",       "ZZ",      color_ZZ);
       //plotter.AddProcess("11_Wg",       "W#gamma", color_Wg);
+      //plotter.AddProcess("15_WgStar", "W#gamma*", color_WgStar);
       //plotter.AddProcess("07_ZJets",    "Z+jets",  color_ZJets);
       //plotter.AddProcess("09_TTV",      "ttV",     color_TTV);
       //plotter.AddProcess("04_TTTo2L2Nu", "tt",     color_TTTo2L2Nu);
@@ -105,12 +109,13 @@ void runPlotter(TString level,
       
       //plotter.AddProcess("Higgs_Zp2HDM_ww_MZP600_MA0300_13TeV",       "MZP600",     kOrange);
       //plotter.AddProcess("Higgs_Zp2HDM_ww_MZP2500_MA0300_13TeV",      "MZP2500",    kAzure);
-      plotter.AddProcess("WWTo2L2Nu",                                 "WW",         kAzure-9);
-      plotter.AddProcess("HZJ_HToWW_M125",                            "HZ",         kOrange+1);
-      plotter.AddProcess("GluGluHToWWTo2L2Nu_M124",                   "HWW",        kAzure-7);
-      plotter.AddProcess("ttHJetToNonbb_M125",                        "ttH",        kOrange+3);
-      plotter.AddProcess("monoH_2HDM_MZp-600_MA0-400",         "m_{Z'} 600",        kRed);
-      plotter.AddProcess("monoH_2HDM_MZp-2000_MA0-400",       "m_{Z'} 2000",        kGreen+2);
+      plotter.AddProcess("WWTo2L2Nu",                                 "WW",        kAzure-9);
+      plotter.AddProcess("HZJ_HToWW_M125",                            "HZ",       kOrange+1);
+      plotter.AddProcess("ggZH_HToWW_M125",                         "ggHZ",       kOrange+3);
+      plotter.AddProcess("GluGluHToWWTo2L2Nu_M124",                  "HWW",        kAzure-7);
+      plotter.AddProcess("monoH_2HDM_MZp-600_MA0-400",        "m_{Z'} 600",            kRed);
+      plotter.AddProcess("monoH_2HDM_MZp-2000_MA0-400",      "m_{Z'} 2000",        kGreen+2);
+      //plotter.AddProcess("ttHJetToNonbb_M125",                        "ttH",        kOrange+3);
 
       if (datadriven)
 	{
@@ -257,15 +262,12 @@ void runPlotter(TString level,
 	  plotter.Draw(prefix + "ht"            + suffix, "H_{T}",                             20, 0, "GeV",  scale, true, 0, 1500);
 	  plotter.Draw(prefix + "htjets"        + suffix, "#sum_{jet} p_{T}",                  20, 0, "GeV",  scale, true, 0, 1500);
 	  plotter.Draw(prefix + "htnojets"      + suffix, "p_{T}^{lep1} + p_{T}^{lep2} + MET", 20, 0, "GeV",  scale, true, 0, 1500);
-	  plotter.Draw(prefix + "nbjet15loose"  + suffix, "number of (15 GeV) loose b-jets",   -1, 0, "NULL", scale);
-	  plotter.Draw(prefix + "nbjet15medium" + suffix, "number of (15 GeV) medium b-jets",  -1, 0, "NULL", scale);
-	  plotter.Draw(prefix + "nbjet15tight"  + suffix, "number of (15 GeV) tight b-jets",   -1, 0, "NULL", scale);
-	  plotter.Draw(prefix + "nbjet20loose"  + suffix, "number of (20 GeV) loose b-jets",   -1, 0, "NULL", scale);
-	  plotter.Draw(prefix + "nbjet20medium" + suffix, "number of (20 GeV) medium b-jets",  -1, 0, "NULL", scale);
-	  plotter.Draw(prefix + "nbjet20tight"  + suffix, "number of (20 GeV) tight b-jets",   -1, 0, "NULL", scale);
-	  plotter.Draw(prefix + "nbjet30loose"  + suffix, "number of (30 GeV) loose b-jets",   -1, 0, "NULL", scale);
-	  plotter.Draw(prefix + "nbjet30medium" + suffix, "number of (30 GeV) medium b-jets",  -1, 0, "NULL", scale);
-	  plotter.Draw(prefix + "nbjet30tight"  + suffix, "number of (30 GeV) tight b-jets",   -1, 0, "NULL", scale);
+	  plotter.Draw(prefix + "nbjet30csvv2l"  + suffix, "number of 30 GeV csvv2l b-jets",   -1, 0, "NULL", scale);
+	  plotter.Draw(prefix + "nbjet30csvv2m"  + suffix, "number of 30 GeV csvv2m b-jets",   -1, 0, "NULL", scale);
+	  plotter.Draw(prefix + "nbjet30csvv2t"  + suffix, "number of 30 GeV csvv2t b-jets",   -1, 0, "NULL", scale);
+	  plotter.Draw(prefix + "nbjet30cmvav2l" + suffix, "number of 30 GeV cmvav2l b-jets",  -1, 0, "NULL", scale);
+	  plotter.Draw(prefix + "nbjet30cmvav2m" + suffix, "number of 30 GeV cmvav2m b-jets",  -1, 0, "NULL", scale);
+	  plotter.Draw(prefix + "nbjet30cmvav2t" + suffix, "number of 30 GeV cmvav2t b-jets",  -1, 0, "NULL", scale);
 	  plotter.Draw(prefix + "njet"          + suffix, "number of (30 GeV) jets",           -1, 0, "NULL", scale);
 
 
