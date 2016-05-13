@@ -42,7 +42,7 @@ std::vector<TTree*> _mctree;
 // MVA
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void MVA(TString signal     = "monoH_2HDM_MZp-2000_MA0-400",
+void MVA(TString signal     = "monoH_2HDM_MZp-600_MA0-400",
 	 bool    doMVATrain = true,
 	 bool    doMVARead  = false)
 {
@@ -102,7 +102,7 @@ void MVATrain(TString signal)
   _mctree.clear();
 
   AddProcess("signal", signal);
-  AddProcess("background", "ggZH_HToWW_M125");
+  AddProcess("background", "HZJ_HToWW_M125");
 
   //  AddProcess("background", "14_HZ");
   //  AddProcess("background", "10_HWW");
@@ -159,8 +159,7 @@ void MVATrain(TString signal)
 
   // Book MVA
   //----------------------------------------------------------------------------
-  factory->BookMethod(TMVA::Types::kMLP, "MLP",
-		      "H:!V:NeuronType=sigmoid:VarTransform=N:NCycles=600:HiddenLayers=25,10:TestRate=5:!UseRegulator");
+  factory->BookMethod(TMVA::Types::kBDT, "BDT","");
 
 
   // Train, test and evaluate MVA
@@ -234,7 +233,8 @@ void MVARead(TString signal, TString filename)
 
   // Book MVA methods
   //----------------------------------------------------------------------------
-  reader->BookMVA("MLP", weightsdir + signal + "_MLP.weights.xml");
+  reader->BookMVA("BDT", weightsdir + signal + "_BDT.weights.xml");
+
 
   // Get MVA response
   //----------------------------------------------------------------------------
@@ -275,7 +275,7 @@ void MVARead(TString signal, TString filename)
 
     theTree->GetEntry(ievt);
 
-    mva = reader->EvaluateMVA("MLP");
+    mva = reader->EvaluateMVA("BDT");
 
     b_mva->Fill();
 
