@@ -1,14 +1,12 @@
 #if !defined(MYLIB_CONSTANTS_H)
 #define MYLIB_CONSTANTS_H 1
 
-
+//#include "CutsFR.h"
 #include "CutsMonoH.h"
 //#include "CutsTop.h"
-//#include "CutsStop.h" 
+//#include "CutsStop.h"
 //#include "CutsTTDM.h"
-//#include "CutsWW.h"
 //#include "CutsWZ.h"
-
 
 const double lumi_fb_blind = 1.371;
 const double lumi_fb       = 2.318;
@@ -81,6 +79,7 @@ const Color_t color_WJets     = kGray+1;
 const Color_t color_TTV       = kGreen-6;
 const Color_t color_HWW       = kAzure-7;
 const Color_t color_Wg        = kBlue;
+const Color_t color_WgStar    = kBlue+2;
 const Color_t color_Zg        = kTeal;
 const Color_t color_VVV       = kYellow-6;
 const Color_t color_HZ        = kOrange+1;
@@ -99,6 +98,9 @@ const int njetbin = 3;  // 0jet, 1jet, 2+jet, all
 
 
 enum {
+  e,
+  m,
+  l, 
   ee,
   mm,
   em,
@@ -112,6 +114,9 @@ enum {
 };
 
 const TString schannel[nchannel] = {
+  "e",
+  "m",
+  "l",
   "ee",
   "mm",
   "em",
@@ -124,6 +129,9 @@ const TString schannel[nchannel] = {
 };
 
 const TString lchannel[nchannel] = {
+  "e",
+  "#mu",
+  "l",
   "ee",
   "#mu#mu",
   "e#mu",
