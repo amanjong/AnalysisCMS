@@ -215,7 +215,7 @@ void runPlotter(TString level,
 	  plotter.Draw(prefix + "sumjpt12" + suffix, "p_{T}^{jet1} + p_{T}^{jet2}", 10, 0, "GeV",  scale, true, 0, 600);
 	  plotter.Draw(prefix + "sumpt12"  + suffix, "p_{T}^{lep1} + p_{T}^{lep2}", 10, 0, "GeV",  scale, true, 0, 600);
 	  plotter.Draw(prefix + "ptww"     + suffix, "p_{T}^{WW}",                  10, 0, "GeV",  scale, true, 0, 600);
-	  plotter.Draw(prefix + "pt2l"     + suffix, "p_{T}^{#font[12]{ll}}",       10, 0, "GeV",  scale, true, 0, 600);
+	  plotter.Draw(prefix + "pt2l"     + suffix, "p_{T}^{#font[12]{ll}}",       10, 0, "GeV",  linY,  false, 0, 600, 0, 0.3);
 
 
 	  // Common histograms with minitree variables
@@ -224,8 +224,8 @@ void runPlotter(TString level,
 
 	  plotter.Draw(prefix + "dphijet1met"   + suffix, "#Delta#phi(jet1,E_{T}^{miss})",      5, 2, "rad",  linY, false, 0, 3.2, 0, 0.2);
 	  plotter.Draw(prefix + "dphijet2met"   + suffix, "#Delta#phi(jet2,E_{T}^{miss})",      5, 2, "rad",  linY, false, 0, 3.2, 0, 0.2);
-	  plotter.Draw(prefix + "dphijj"        + suffix, "#Delta#phi(jet1,jet2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.1);
-	  plotter.Draw(prefix + "dphijjmet"     + suffix, "#Delta#phi(jj,E_{T}^{miss})",        5, 2, "rad",  linY, false, 0, 3.2, 0, 0.1);
+	  plotter.Draw(prefix + "dphijj"        + suffix, "#Delta#phi(jet1,jet2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.2);
+	  plotter.Draw(prefix + "dphijjmet"     + suffix, "#Delta#phi(jj,E_{T}^{miss})",        5, 2, "rad",  linY, false, 0, 3.2, 0, 0.2);
 	  plotter.Draw(prefix + "dphilep1jet1"  + suffix, "#Delta#phi(lep1,jet1)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.3);
 	  plotter.Draw(prefix + "dphilep1jet2"  + suffix, "#Delta#phi(lep1,jet2)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.2);
 	  plotter.Draw(prefix + "dphilep2jet1"  + suffix, "#Delta#phi(lep2,jet1)",              5, 2, "rad",  linY, false, 0, 3.2, 0, 0.2);
@@ -235,7 +235,7 @@ void runPlotter(TString level,
 	  plotter.Draw(prefix + "dphillstar"    + suffix, "#Delta#phi*(lep1,lep2)",             5, 2, "rad",  linY, false, 0, 3.2, 0, 0.2);
 	  plotter.Draw(prefix + "dphilmet1"     + suffix, "#Delta#phi(lep1,E_{T}^{miss})",      5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
 	  plotter.Draw(prefix + "dphilmet2"     + suffix, "#Delta#phi(lep2,E_{T}^{miss})",      5, 2, "rad",  linY, false, 0, 3.2, 0, 0.6);
-	  plotter.Draw(prefix + "drll"          + suffix, "#DeltaR(lep1,lep2)",                 5, 1, "NULL", linY, false, 0, 4.0, 0, 0.8);
+	  plotter.Draw(prefix + "drll"          + suffix, "#DeltaR(lep1,lep2)",                 5, 1, "NULL", linY, false, 0, 4.0, 0, 1.0);
           plotter.Draw(prefix + "lep1eta"       + suffix, "leading lepton #eta",               -1, 1, "NULL", scale);
 	  plotter.Draw(prefix + "lep2eta"       + suffix, "trailing lepton #eta",              -1, 1, "NULL", scale);
 	  plotter.Draw(prefix + "jet1eta"       + suffix, "leading jet #eta",                  -1, 1, "NULL", scale);
@@ -246,19 +246,19 @@ void runPlotter(TString level,
 	  plotter.Draw(prefix + "jet2phi"       + suffix, "trailing jet #phi",                  5, 2, "rad",  scale);
 	  plotter.Draw(prefix + "metPfType1Phi" + suffix, "E_{T}^{miss} #phi",                  5, 2, "rad",  scale);
 	  plotter.Draw(prefix + "metTtrkPhi"    + suffix, "track E_{T}^{miss} #phi",            5, 2, "rad",  scale);
-          plotter.Draw(prefix + "lep1pt"        + suffix, "leading lepton p_{T}",               5, 0, "GeV",  scale, true, 0,  400);
-	  plotter.Draw(prefix + "lep2pt"        + suffix, "trailing lepton p_{T}",              5, 0, "GeV",  scale, true, 0,  400);
-	  plotter.Draw(prefix + "jet1pt"        + suffix, "leading jet p_{T}",                  5, 0, "GeV",  scale, true, 0,  400);
-	  plotter.Draw(prefix + "jet2pt"        + suffix, "trailing jet p_{T}",                 5, 0, "GeV",  scale, true, 0,  400);
+          plotter.Draw(prefix + "lep1pt"        + suffix, "leading lepton p_{T}",              10, 0, "GeV",  linY, false, 0,   400, 0, 0.4);
+	  plotter.Draw(prefix + "lep2pt"        + suffix, "trailing lepton p_{T}",              5, 0, "GeV",  linY, false, 0,   200, 0, 0.4);
+	  plotter.Draw(prefix + "jet1pt"        + suffix, "leading jet p_{T}",                  5, 0, "GeV",  scale, true, 0,   400);
+	  plotter.Draw(prefix + "jet2pt"        + suffix, "trailing jet p_{T}",                 5, 0, "GeV",  scale, true, 0,   400);
 	  plotter.Draw(prefix + "jet1mass"      + suffix, "leading jet mass",                  -1, 0, "GeV",  scale, true, 0,   50);
 	  plotter.Draw(prefix + "jet2mass"      + suffix, "trailing jet mass",                 -1, 0, "GeV",  scale, true, 0,   50);
 	  plotter.Draw(prefix + "mc"            + suffix, "m_{c}",                             10, 0, "GeV",  scale, true, 0,  500);
-	  plotter.Draw(prefix + "metPfType1"    + suffix, "E_{T}^{miss}",                      10, 0, "GeV",  linY, false, 0,  500, 0, 0.6);
-	  plotter.Draw(prefix + "metTtrk"       + suffix, "track E_{T}^{miss}",                10, 0, "GeV",  linY, false, 0,  500, 0, 0.5);
-	  plotter.Draw(prefix + "mpmet"         + suffix, "min projected E_{T}^{miss}",        10, 0, "GeV",  linY, false, 0,  500, 0, 0.5);
-	  plotter.Draw(prefix + "mth"           + suffix, "m_{T}^{H}",                         10, 0, "GeV",  linY, false, 0,  500, 0, 0.4);
-	  plotter.Draw(prefix + "mtw1"          + suffix, "m_{T}^{W,1}",                       10, 0, "GeV",  linY, false, 0,  500, 0, 0.6);
-	  plotter.Draw(prefix + "mtw2"          + suffix, "m_{T}^{W,2}",                       10, 0, "GeV",  linY, false, 0,  500, 0, 0.6);
+	  plotter.Draw(prefix + "metPfType1"    + suffix, "E_{T}^{miss}",                      10, 0, "GeV",  linY, false, 0,  500, 0, 0.3);
+	  plotter.Draw(prefix + "metTtrk"       + suffix, "track E_{T}^{miss}",                10, 0, "GeV",  linY, false, 0,  500, 0, 0.3);
+	  plotter.Draw(prefix + "mpmet"         + suffix, "min projected E_{T}^{miss}",        10, 0, "GeV",  linY, false, 0,  500, 0, 0.3);
+	  plotter.Draw(prefix + "mth"           + suffix, "m_{T}^{H}",                         10, 0, "GeV",  linY, false, 0,  500, 0, 0.2);
+	  plotter.Draw(prefix + "mtw1"          + suffix, "m_{T}^{W,1}",                       10, 0, "GeV",  linY, false, 0,  500, 0, 0.25);
+	  plotter.Draw(prefix + "mtw2"          + suffix, "m_{T}^{W,2}",                       10, 0, "GeV",  linY, false, 0,  500, 0, 0.25);
 	  plotter.Draw(prefix + "ht"            + suffix, "H_{T}",                             20, 0, "GeV",  scale, true, 0, 1500);
 	  plotter.Draw(prefix + "htjets"        + suffix, "#sum_{jet} p_{T}",                  20, 0, "GeV",  scale, true, 0, 1500);
 	  plotter.Draw(prefix + "htnojets"      + suffix, "p_{T}^{lep1} + p_{T}^{lep2} + MET", 20, 0, "GeV",  scale, true, 0, 1500);
@@ -277,7 +277,7 @@ void runPlotter(TString level,
 	    {
 	      plotter.Draw(prefix + "fullpmet" + suffix, "projected E_{T}^{miss}",       10, 0, "GeV", scale, false, 0, 100);
 	      plotter.Draw(prefix + "trkpmet"  + suffix, "projected track E_{T}^{miss}",  2, 0, "GeV", scale, false, 0, 100);
-	      plotter.Draw(prefix + "mllstar"  + suffix, "m2l^{*}",                      10, 0, "GeV",  linY, false, 0, 250, 0, 0.7);
+	      plotter.Draw(prefix + "mllstar"  + suffix, "m2l^{*}",                      10, 0, "GeV",  linY, false, 0, 250, 0, 0.5);
 	    }
 
 
