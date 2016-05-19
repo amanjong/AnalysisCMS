@@ -73,22 +73,6 @@ float AnalysisCMS::ElectronIsolation(int k)
 
 
 //------------------------------------------------------------------------------
-// IsIsolatedLepton
-//------------------------------------------------------------------------------
-bool AnalysisCMS::IsIsolatedLepton(int k)
-{
-  float flavour = std_vector_lepton_flavour->at(k);
-
-  bool is_isolated_lepton = false;
-
-  if      (fabs(flavour) == ELECTRON_FLAVOUR) is_isolated_lepton = true;
-  else if (fabs(flavour) == MUON_FLAVOUR)     is_isolated_lepton = (MuonIsolation(k) < 0.15);
-  
-  return is_isolated_lepton;
-}
-
-
-//------------------------------------------------------------------------------
 // FillHistograms
 //------------------------------------------------------------------------------
 void AnalysisCMS::FillHistograms(int ichannel, int icut, int ijet)
@@ -312,6 +296,10 @@ void AnalysisCMS::Setup(TString analysis,
 //------------------------------------------------------------------------------
 void AnalysisCMS::ApplyWeights()
 {
+  _event_weight = 1.0;
+
+  if (_analysis.EqualTo("FR")) return;
+
   _event_weight = trigger * metFilter;
 
   if (!_ismc && _sample.Contains("DD_")) _event_weight *= _fake_weight;
@@ -325,12 +313,23 @@ void AnalysisCMS::ApplyWeights()
   //----------------------------------------------------------------------------
   if (std_vector_lepton_idisoW)
     {
-      float sf_btag    = bPogSF;
+      float sf_btag = 1.0;
+
+      if (_analysis.EqualTo("Top") || _analysis.EqualTo("TTDM") || _analysis.EqualTo("Stop"))
+	{
+	  sf_btag = bPogSF_CSVM;
+	  if (_systematic_btag_up) sf_btag = bPogSF_CSVM_Up;
+	  if (_systematic_btag_do) sf_btag = bPogSF_CSVM_Down;
+	}
+      else
+	{
+	  sf_btag = bPogSF_CMVAL;
+	  if (_systematic_btag_up) sf_btag = bPogSF_CMVAL_Up;
+	  if (_systematic_btag_do) sf_btag = bPogSF_CMVAL_Down;
+	}
+
       float sf_trigger = effTrigW; // To be updated for WZ
       float sf_idiso   = std_vector_lepton_idisoW->at(0) * std_vector_lepton_idisoW->at(1);
-
-      if (_systematic_btag_up) sf_btag = bPogSFUp;
-      if (_systematic_btag_do) sf_btag = bPogSFDown;
 
       if (_systematic_idiso_up) sf_idiso = std_vector_lepton_idisoW_Up->at(0)   * std_vector_lepton_idisoW_Up->at(1);
       if (_systematic_idiso_do) sf_idiso = std_vector_lepton_idisoW_Down->at(0) * std_vector_lepton_idisoW_Down->at(1);
@@ -350,13 +349,19 @@ void AnalysisCMS::ApplyWeights()
     }
 
   if (_sample.EqualTo("WWTo2L2Nu"))     _event_weight *= nllW;
-  if (_sample.EqualTo("WgStarLNuEE"))   _event_weight *= 1.23;
-  if (_sample.EqualTo("WgStarLNuMuMu")) _event_weight *= 1.23;
-  if (_sample.EqualTo("Wg_AMCNLOFXFX")) _event_weight *= !(Gen_ZGstar_mass > 0. && Gen_ZGstar_MomId == 22);
+  if (_sample.EqualTo("WgStarLNuEE"))   _event_weight *= 2.0;  // k_factor = 2.0 +- 0.5
+  if (_sample.EqualTo("WgStarLNuMuMu")) _event_weight *= 2.0;  // k_factor = 2.0 +- 0.5
 
-  //  _event_weight *= (std_vector_lepton_genmatched->at(0)*std_vector_lepton_genmatched->at(1));
+  if (_sample.EqualTo("Wg_AMCNLOFXFX"))
+    {
+      _event_weight *= !(Gen_ZGstar_mass > 0. && Gen_ZGstar_MomId == 22);
+    }
+  else
+    {
+      _event_weight *= (std_vector_lepton_genmatched->at(0)*std_vector_lepton_genmatched->at(1));
 
-  //  if (_analysis.EqualTo("WZ")) _event_weight *= std_vector_lepton_genmatched->at(2);
+      if (_analysis.EqualTo("WZ")) _event_weight *= std_vector_lepton_genmatched->at(2);
+    }
 
   _event_weight *= _gen_ptll_weight;
 
@@ -759,12 +764,12 @@ void AnalysisCMS::GetSoftMuon()
   // https://twiki.cern.ch/twiki/bin/view/CMS/WW2015Variables#Soft_muons
   for (UInt_t i=0; i<std_vector_softMuPt->size(); i++) {
 
-    if (std_vector_softMuPt->at(i)  < 3.)                       continue;
-    if (std_vector_softMuD0->at(i)  < 0.2)                      continue;
-    if (std_vector_softMuDz->at(i)  < 0.5)                      continue;
-    if (std_vector_softMuIso->at(i) < 0.15)                     continue;
-    if (std_vector_softMuIsTrackerMuon->at(i)         == false) continue;
-    if (std_vector_softMuTMLastStationAngTight->at(i) == false) continue;
+    if (std_vector_softMuPt->at(i)  < 3.)               continue;
+    if (std_vector_softMuD0->at(i)  < 0.2)              continue;
+    if (std_vector_softMuDz->at(i)  < 0.5)              continue;
+    if (std_vector_softMuIso->at(i) < 0.15)             continue;
+    if (!std_vector_softMuIsTrackerMuon->at(i))         continue;
+    if (!std_vector_softMuTMLastStationAngTight->at(i)) continue;
     
     _foundsoftmuon = true;
     
