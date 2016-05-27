@@ -42,7 +42,7 @@ std::vector<TTree*> _mctree;
 // MVA
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void MVA(TString signal     = "monoH_2HDM_MZp-2000_MA0-400",
+void MVA(TString signal     = "monoH_2HDM_MZp-600_MA0-400",
 	 bool    doMVATrain = true,
 	 bool    doMVARead  = false)
 {
@@ -102,6 +102,7 @@ void MVATrain(TString signal)
   _mctree.clear();
 
   AddProcess("signal", signal);
+  AddProcess("background", "HZJ_HToWW_M125");
   AddProcess("background", "ggZH_HToWW_M125");
 
   //  AddProcess("background", "14_HZ");
@@ -154,7 +155,7 @@ void MVATrain(TString signal)
 
   // Preselection cuts and preparation
   //----------------------------------------------------------------------------
-  factory->PrepareTrainingAndTestTree("njet > 1", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:!V");
+  factory->PrepareTrainingAndTestTree("", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:!V");
 
 
   // Book MVA

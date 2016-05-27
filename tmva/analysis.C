@@ -62,7 +62,7 @@ ofstream                 _datacard;
 // analysis
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void analysis(TString signal            = "monoH_2HDM_MZp-2000_MA0-400",
+void analysis(TString signal            = "monoH_2HDM_MZp-600_MA0-400",
 	      float   cut               = 0.8,
 	      bool    doPrintYields     = false,
 	      bool    doGetScaleFactors = true,
