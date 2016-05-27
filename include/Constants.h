@@ -5,14 +5,9 @@
 //#include "CutsFR.h"
 #include "CutsMonoH.h"
 //#include "CutsTop.h"
-<<<<<<< HEAD
 //#include "CutsStop.h"
 //#include "CutsTTDM.h"
-=======
-#include "CutsStop.h"
-//#include "CutsTTDM.h"
 //#include "CutsWW.h"
->>>>>>> b4c5ea8eb453602423de383178ce010df15e668e
 //#include "CutsWZ.h"
 
 const double lumi_fb_2016B       = 0.218;

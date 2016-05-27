@@ -103,6 +103,7 @@ void MVATrain(TString signal)
 
   AddProcess("signal", signal);
   AddProcess("background", "HZJ_HToWW_M125");
+  AddProcess("background", "ggZH_HToWW_M125");
 
   //  AddProcess("background", "14_HZ");
   //  AddProcess("background", "10_HWW");
@@ -154,7 +155,7 @@ void MVATrain(TString signal)
 
   // Preselection cuts and preparation
   //----------------------------------------------------------------------------
-  factory->PrepareTrainingAndTestTree("njet > 1", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:!V");
+  factory->PrepareTrainingAndTestTree("", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:!V");
 
 
   // Book MVA

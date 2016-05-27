@@ -11,11 +11,7 @@
 // Constants
 //------------------------------------------------------------------------------
 const int     _verbosity = 0;
-<<<<<<< HEAD
 const TString _inputdir  = "../minitrees/MonoH/";
-=======
-//const TString _inputdir  = "../minitrees/nominal/TTDM/";
->>>>>>> b4c5ea8eb453602423de383178ce010df15e668e
 
 enum {njmin, njmax, nbmin, nbmax};
 
