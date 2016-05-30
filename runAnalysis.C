@@ -1,10 +1,6 @@
-#include "src/AnalysisControl.C"
+//#include "src/AnalysisControl.C"
 //#include "src/AnalysisFR.C"
-<<<<<<< HEAD
 #include "src/AnalysisMonoH.C"
-=======
-//#include "src/AnalysisMonoH.C"
->>>>>>> 0537ea34853be4c4a3052b8be8db4a0ba544d74b
 //#include "src/AnalysisStop.C"
 //#include "src/AnalysisTop.C"
 //#include "src/AnalysisTTDM.C"
@@ -23,13 +19,10 @@ void runAnalysis(TString filename,
 
   float baseW_lumi_fb = 1.0;  // baseW has been computed for 1.0 fb-1
 
-  AnalysisControl analysis(latino, systematic); analysis.Loop("Control", filename, baseW_lumi_fb);
+  //  AnalysisControl analysis(latino, systematic); analysis.Loop("Control", filename, baseW_lumi_fb);
   //  AnalysisFR      analysis(latino, systematic); analysis.Loop("FR",      filename, baseW_lumi_fb);
-<<<<<<< HEAD
   AnalysisMonoH   analysis(latino, systematic); analysis.Loop("MonoH",   filename, baseW_lumi_fb);
-=======
   //  AnalysisMonoH   analysis(latino, systematic); analysis.Loop("MonoH",   filename, baseW_lumi_fb);
->>>>>>> 0537ea34853be4c4a3052b8be8db4a0ba544d74b
   //  AnalysisStop    analysis(latino, systematic); analysis.Loop("Stop",    filename, baseW_lumi_fb);
   //  AnalysisTop     analysis(latino, systematic); analysis.Loop("Top",     filename, baseW_lumi_fb);
   //  AnalysisTTDM    analysis(latino, systematic); analysis.Loop("TTDM",    filename, baseW_lumi_fb);
