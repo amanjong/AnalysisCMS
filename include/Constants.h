@@ -1,7 +1,7 @@
 #if !defined(MYLIB_CONSTANTS_H)
 #define MYLIB_CONSTANTS_H 1
 
-//#include "CutsControl.h"
+#include "CutsControl.h"
 //#include "CutsFR.h"
 #include "CutsMonoH.h"
 //#include "CutsTop.h"
@@ -9,6 +9,10 @@
 //#include "CutsTTDM.h"
 //#include "CutsWW.h"
 //#include "CutsWZ.h"
+
+//#include "BTagWorkingPoints74X.h"
+#include "BTagWorkingPoints76X.h"
+
 
 const double lumi_fb_2016B       = 0.218;
 const double lumi_fb_blind_2015D = 1.324;
@@ -146,20 +150,6 @@ const TString lchannel[nchannel] = {
   "#mu#mu#mu",
   "lll"
 };
-
-
-// https://twiki.cern.ch/twiki/bin/view/CMS/BtagRecommendation76X
-// pfCombinedMVAV2BJetTags
-const double cMVAv2L = -0.715;
-const double cMVAv2M =  0.185;
-const double cMVAv2T =  0.875;
-
-
-// https://twiki.cern.ch/twiki/bin/view/CMS/BtagRecommendation76X
-// pfCombinedInclusiveSecondaryVertexV2BJetTags
-const double CSVv2L = 0.460;
-const double CSVv2M = 0.800;
-const double CSVv2T = 0.935;
 
 
 // MET filters
