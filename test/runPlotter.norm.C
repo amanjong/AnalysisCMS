@@ -110,12 +110,12 @@ void runPlotter(TString level,
       //plotter.AddProcess("Higgs_Zp2HDM_ww_MZP600_MA0300_13TeV",       "MZP600",       kOrange);
       //plotter.AddProcess("Higgs_Zp2HDM_ww_MZP2500_MA0300_13TeV",     "MZP2500",        kAzure);
       //plotter.AddProcess("WWTo2L2Nu",                                     "WW",      kAzure-9);
-      plotter.AddProcess("HZJ_HToWW_M125",                                  "HZ",     kOrange+1);
-      plotter.AddProcess("ggZH_HToWW_M125",                               "ggHZ",      kAzure-7);
+      //plotter.AddProcess("HZJ_HToWW_M125",                                "HZ",     kOrange+1);
+      //plotter.AddProcess("ggZH_HToWW_M125",                             "ggHZ",      kAzure-7);
       //plotter.AddProcess("GluGluHToWWTo2L2Nu_M125",                      "HWW",     kOrange+3);
       plotter.AddProcess("monoH_2HDM_MZp-600_MA0-400",              "m_{Z'} 600",          kRed);
       plotter.AddProcess("monoH_2HDM_MZp-2000_MA0-400",            "m_{Z'} 2000",      kGreen+2);
-      //plotter.AddProcess("ttHJetToNonbb_M125",                           "ttH",     kOrange+3);
+      plotter.AddProcess("ttHJetToNonbb_M125",                             "ttH",      kAzure-7);
 
       if (datadriven)
 	{

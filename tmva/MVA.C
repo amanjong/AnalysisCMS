@@ -155,7 +155,7 @@ void MVATrain(TString signal)
 
   // Preselection cuts and preparation
   //----------------------------------------------------------------------------
-  factory->PrepareTrainingAndTestTree("", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:!V");
+  factory->PrepareTrainingAndTestTree("", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:MixMode=Random:!V");
 
 
   // Book MVA

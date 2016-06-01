@@ -104,6 +104,8 @@ void MVATrain(TString signal)
   AddProcess("signal", signal);
   AddProcess("background", "HZJ_HToWW_M125");
   AddProcess("background", "ggZH_HToWW_M125");
+  AddProcess("background", "GluGluHToWWTo2L2Nu_M125");
+  AddProcess("background", "WWTo2L2Nu");
 
   //  AddProcess("background", "14_HZ");
   //  AddProcess("background", "10_HWW");
@@ -155,12 +157,12 @@ void MVATrain(TString signal)
 
   // Preselection cuts and preparation
   //----------------------------------------------------------------------------
-  factory->PrepareTrainingAndTestTree("", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Alternate:!V");
+  factory->PrepareTrainingAndTestTree("", ":nTrain_Signal=0:nTest_Signal=0:nTrain_Background=0:nTest_Background=0:SplitMode=Random:MixMode=Random:!V");
 
 
   // Book MVA
   //----------------------------------------------------------------------------
-  factory->BookMethod(TMVA::Types::kBDT, "BDT","");
+  factory->BookMethod(TMVA::Types::kBDT, "BDT", ":NTrees=20:BoostType=AdaBoost:SeparationType=GiniIndex:nCuts=20");
 
 
   // Train, test and evaluate MVA
